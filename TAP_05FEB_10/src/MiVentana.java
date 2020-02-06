@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author asael
  */
-public class MiVentana extends JFrame {
+public class MiVentana extends JFrame implements ActionListener {
 
     GridLayout grid;
     Dimension dimension;
@@ -82,14 +84,10 @@ public class MiVentana extends JFrame {
         int indexPanel = 0;
         for (int i = 1; i < materias.length-1; i++) {
             arregloBotones[i-1] = new JButton(materias[i-1]);
+            arregloBotones[i-1].addActionListener(this);
             panelReticula[indexPanel].add(arregloBotones[i-1]);
             if(i % 8 == 0 && i != 0) indexPanel++ ;
-        }        
-        
-        
-        
-            
-            
+        }                
         
         
          
@@ -109,5 +107,13 @@ public class MiVentana extends JFrame {
         setLayout(grid);
         setTitle("Ingeniería en sistemas computacionales");
         
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Tópicos avanzados de programación")){
+            ClaseTopicos ct = new ClaseTopicos();
+            ct.setVisible(true);
+        }
     }
 }

@@ -10,7 +10,7 @@
  */
 public class Principal {
     public static void main(String[] args) {
-        ClaseTopicos mv=new ClaseTopicos();                
+        MiVentana mv=new MiVentana();
         mv.setVisible(true);
     }
             
