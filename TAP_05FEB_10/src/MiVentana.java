@@ -40,8 +40,8 @@ public class MiVentana extends JFrame {
     public MiVentana() throws HeadlessException {
         t = Toolkit.getDefaultToolkit();
         dimension = t.getScreenSize();
-        propiedadesVentana();
         
+        propiedadesVentana();        
         panelTitulo=new JPanel();
         panelTitulo.setLayout(new FlowLayout());
         panelTitulo.setBackground(Color.blue);
@@ -67,16 +67,32 @@ public class MiVentana extends JFrame {
 //            }
 //        }
         
-        int indexPanel=0;
-        int indexButton=0;
-        while(indexButton<16){
-            panelReticula[indexPanel].setLayout(new GridLayout(1,8,5,5));
-            add(panelReticula[j]);                
-            arregloBotones[j] = new JButton(materias[j]);           
-            panelReticula[i].add(arregloBotones[j]);
+        
+        panelReticula = new JPanel[6];
+        //Aquí se agragan los botones a cada uno
+        
+            //En este fragmento se crean los nuevos JPanels
+        for (int i = 0; i < panelReticula.length; i++) {
+            panelReticula[i]=new JPanel();
+            panelReticula[i].setLayout(new GridLayout(1,8,5,5));
+            panelReticula[i].setSize(dimension.width, 50);            
+            add(panelReticula[i]);            
         }
         
+        int indexPanel = 0;
+        for (int i = 1; i < materias.length-1; i++) {
+            arregloBotones[i-1] = new JButton(materias[i-1]);
+            panelReticula[indexPanel].add(arregloBotones[i-1]);
+            if(i % 8 == 0 && i != 0) indexPanel++ ;
+        }        
         
+        
+        
+            
+            
+        
+        
+         
         panelReticula2 = new JPanel();
         panelReticula2.setLayout(new GridLayout(1,8,5,5));
         
