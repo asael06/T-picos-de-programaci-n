@@ -11,7 +11,10 @@ package Principal;
  */
 public class Principal {
     public static void main(String[] args) {
-        ClaseFlowLayoutME layo=new ClaseFlowLayoutME();
-        layo.setVisible(true);
+//        ClaseFlowLayoutME layo=new ClaseFlowLayoutME();
+//        layo.setVisible(true);
+        Seleccionador selec=new Seleccionador();
+        selec.setVisible(true);
+
     }
 }
