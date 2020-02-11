@@ -10,7 +10,7 @@
  */
 public class Principal {
     public static void main(String[] args) {
-        PanelMaterias pm=new PanelMaterias();
-        pm.setVisible(true);
+        Selector sel=new Selector();
+        sel.setVisible(true);
     }
 }

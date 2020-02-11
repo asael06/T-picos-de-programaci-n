@@ -9,8 +9,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /*
@@ -28,7 +30,7 @@ public class PanelMaterias extends JFrame implements ActionListener{
     GridLayout grid;
     Dimension dimension;
     Toolkit t;
-    JButton []arregloBotones;
+    JCheckBox []arregloBotones;
     String []materias = {"Calculo diferencial","Calculo integral","Calculo Vectorial","Ecuaciones Diferenciales","Desarrollo Sustentable",
                          "Lenguajes y autómatas I","Lenguajes y autómatas II","Adminstración de redes","Fundamentos de programación",
                          "Programación orientada a objetos","Estructura de datos","Métodos numéricos","Fundamentos de Telecomunicaciones",
@@ -45,13 +47,11 @@ public class PanelMaterias extends JFrame implements ActionListener{
     JPanel panelReticula[];
     JPanel panelReticula2;
     JLabel titulo;
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-    }
+    JButton aceptar;
+    Materia []mat;   
 
     public PanelMaterias() throws HeadlessException {
+        mat=new Materia[materias.length];
         t = Toolkit.getDefaultToolkit();
         dimension = t.getScreenSize();
         
@@ -62,7 +62,7 @@ public class PanelMaterias extends JFrame implements ActionListener{
         add(panelTitulo);
         
         
-        arregloBotones = new JButton[50];
+        arregloBotones = new JCheckBox[50];
         fuente = new Font("Monospaced",Font.BOLD,36);
         titulo=new JLabel();        
         titulo.setText("Retícula Ingeniería en Sistemas Computacionales");
@@ -82,19 +82,34 @@ public class PanelMaterias extends JFrame implements ActionListener{
         
         int indexPanel = 0;
         for (int i = 1; i < materias.length-1; i++) {
-            arregloBotones[i-1] = new JButton(materias[i-1]);
-            arregloBotones[i-1].addActionListener(this);
+            arregloBotones[i-1] = new JCheckBox(materias[i-1]);            
             panelReticula[indexPanel].add(arregloBotones[i-1]);
             if(i % 8 == 0 && i != 0) indexPanel++ ;
-        }                
-        
-        
+        }                     
          
         panelReticula2 = new JPanel();
         panelReticula2.setLayout(new GridLayout(1,8,5,5));
         
         panelReticula2.setBackground(Color.black);
         add(panelReticula2);
+        aceptar=new JButton("Aceptar");  
+        aceptar.addActionListener(this);
+        panelReticula2.add(aceptar);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String cad="";
+        if (e.getActionCommand().equals("Aceptar")) {
+            for (int i = 0; i < materias.length; i++) {
+                mat[i]=new Materia(materias[i],false);                
+                if(arregloBotones[i].isSelected()){
+                    mat[i].setStat(true);
+                    //cad+=materias[i];
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this,cad);
     }
     
     
@@ -109,5 +124,6 @@ public class PanelMaterias extends JFrame implements ActionListener{
         setLayout(grid);
         setTitle("Ingeniería en sistemas computacionales");
     }
+    
     
 }

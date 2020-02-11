@@ -8,14 +8,14 @@
  *
  * @author asael
  */
-public class Maeria {
+public class Materia {
 
-    public Maeria(String nombre, boolean stat) {
+    public Materia(String nombre, boolean stat) {
         this.nombre = nombre;
         this.stat = stat;
     }
 
-    public Maeria() {
+    public Materia() {
     }
     
     String nombre;
