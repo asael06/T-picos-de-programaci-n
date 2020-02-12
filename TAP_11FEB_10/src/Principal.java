@@ -11,6 +11,6 @@
 public class Principal {
     public static void main(String[] args) {
         Selector sel=new Selector();
-        sel.setVisible(true);
+        sel.setVisible(true);      
     }
 }

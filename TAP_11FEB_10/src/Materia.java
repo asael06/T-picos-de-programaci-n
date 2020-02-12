@@ -29,7 +29,7 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public boolean isStat() {
+    public boolean getStat() {
         return stat;
     }
 

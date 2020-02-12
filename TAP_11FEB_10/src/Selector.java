@@ -14,18 +14,17 @@ import javax.swing.border.*;
  *
  * @author asael
  */
-public class Selector extends JFrame implements ActionListener {
-    
-    GridLayout grid;
-    JButton aceptar;
-    JPanel titulo,reticula[],reticulaAceptar;
-    Toolkit t;
-    Dimension dimension;
-    JLabel title;
-    Font fuente;
-    JCheckBox chkMaterias[];
-    Materia mat[];
-    String materias[]={"Calculo diferencial","Calculo integral","Calculo Vectorial","Ecuaciones Diferenciales","Desarrollo Sustentable",
+public class Selector extends JFrame implements ActionListener {    
+    private static GridLayout grid;
+    private JButton aceptar;
+    private static JPanel titulo,reticula[],reticulaAceptar;
+    private Toolkit t;
+    private Dimension dimension;
+    private JLabel title;
+    private Font fuente;
+    private JCheckBox chkMaterias[];
+    private Materia mat[];
+    private static String materias[]={"Calculo diferencial","Calculo integral","Calculo Vectorial","Ecuaciones Diferenciales","Desarrollo Sustentable",
                          "Lenguajes y autómatas I","Lenguajes y autómatas II","Adminstración de redes","Fundamentos de programación",
                          "Programación orientada a objetos","Estructura de datos","Métodos numéricos","Fundamentos de Telecomunicaciones",
                          "Redes de computadora","Conmutación y enrutación de redes de datos","Taller de investigación II","Taller de ética",
@@ -44,13 +43,7 @@ public class Selector extends JFrame implements ActionListener {
         propiedadesVentana();        
         agregarMaterias();
         
-    }   
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-    }
-    
+    }        
     public void propiedadesVentana(){
         //Inicializar variables
         grid=new GridLayout(8,1);
@@ -62,14 +55,14 @@ public class Selector extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);        
         setTitle("Ingeniería en sistemas");
-    }
-    
+    }    
     public void agregarMaterias(){  
         fuente = new Font("Monospaced",Font.BOLD,36);
         title=new JLabel("Retícula Ingeniería en Sistemas Computacionales");
         title.setForeground(Color.white);
         title.setFont(fuente);
-        aceptar=new JButton("Aceptar");
+        aceptar=new JButton("Aceptar");        
+        aceptar.addActionListener(this);
         reticula=new JPanel[6];
         chkMaterias=new JCheckBox[materias.length];
         titulo=new JPanel();
@@ -81,15 +74,18 @@ public class Selector extends JFrame implements ActionListener {
         for (int i = 0; i < reticula.length; i++) {
             reticula[i]=new JPanel();
             reticula[i].setLayout(new GridLayout(1,8,5,5));               
-            add(reticula[i]);            
+            add(reticula[i]);  
+            
         }
         
         int indexPanel = 0;
-        for (int i = 1; i < materias.length-1; i++) {
+        for (int i = 1; i <= materias.length; i++) {
             chkMaterias[i-1] = new JCheckBox(materias[i-1]);
+            chkMaterias[i-1].setSelected(false);
             chkMaterias[i-1].setFont(new Font("Sans Serif",Font.BOLD,12));
             reticula[indexPanel].add(chkMaterias[i-1]);
             if(i % 8 == 0 && i != 0) indexPanel++ ;
+            
         }              
         reticula[5].add(aceptar);
         
@@ -97,6 +93,36 @@ public class Selector extends JFrame implements ActionListener {
         reticulaAceptar.setLayout(new FlowLayout());
         reticulaAceptar.setBackground(new Color(143,144,143));        
         add(reticulaAceptar);
+    }    
+    public void crearMaterias(){
+        mat = new Materia[materias.length];//Damos el tamaño al arreglo de tipo materia        
+        boolean checked=false;
+        System.out.println(materias.length);
+        for (int i = 0; i < mat.length; i++) {
+            if(chkMaterias[i].isSelected())checked=true;//Si el checkbox está activo asigna el valor true a la variable ckecked
+            mat[i]=new Materia(materias[i], checked);//Se crea cada uno de los objetos de tipo materia y se asignan el nombre y el status
+            checked=false;//Se vuelve a asignar el valor false a la variable checked            
+        System.out.println(mat[i].getNombre()+" - "+mat[i].getStat());        
+        }
+        MateriasAprobadas ma=new MateriasAprobadas();
+        ma.setVisible(true);
+    }
+    public static String[] getMaterias(){
+        return materias;
+    }
+    public static GridLayout gridLayout(){
+        return grid;
+    }
+    public static JPanel pnlTitle(){
+        return titulo;
+    }
+    public static JPanel pnlAceptar(){
+        return reticulaAceptar;
+    }
+    
+     @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Aceptar"))crearMaterias();
     }
     
 }
