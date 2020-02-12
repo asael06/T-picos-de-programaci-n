@@ -25,7 +25,23 @@ public class EscuchadorItem extends JFrame implements ItemListener{
     
     @Override
     public void itemStateChanged(ItemEvent e) {
-        
+        int c=0;                
+        String cad="";
+        if(musica.isSelected()){
+            if(c>0)cad+=", ";
+            sMusica="Música";c++;            
+        }
+        else{sMusica="";c--;}
+        cad+=sMusica;
+        if(pintura.isSelected()){
+            if(c>0)cad+=", ";
+            sPintura="Pintura";c++;         
+        }       
+        else{sPintura="";c++;}
+        cad+=sPintura;
+        lbDescription.setText("Seleccione :");
+        lbDescription.setText(lbDescription.getText()+cad);
+             
     }
 
     public EscuchadorItem() throws HeadlessException {
@@ -45,6 +61,8 @@ public class EscuchadorItem extends JFrame implements ItemListener{
         pintura.setFont(fuente);
         lbDescription=new JLabel("Seleccione: ");
         lbDescription.setFont(fuente);
+        musica.addItemListener(this);
+        pintura.addItemListener(this);
         propiedadesVentana();
     }
     
