@@ -23,7 +23,7 @@ public class Selector extends JFrame implements ActionListener {
     private JLabel title;
     private Font fuente;
     private JCheckBox chkMaterias[];
-    private Materia mat[];
+    private static Materia mat[];
     private static String materias[]={"Calculo diferencial","Calculo integral","Calculo Vectorial","Ecuaciones Diferenciales","Desarrollo Sustentable",
                          "Lenguajes y autómatas I","Lenguajes y autómatas II","Adminstración de redes","Fundamentos de programación",
                          "Programación orientada a objetos","Estructura de datos","Métodos numéricos","Fundamentos de Telecomunicaciones",
@@ -107,7 +107,10 @@ public class Selector extends JFrame implements ActionListener {
         MateriasAprobadas ma=new MateriasAprobadas();
         ma.setVisible(true);
     }
-    public static String[] getMaterias(){
+    public static Materia[] getMaterias(){
+        return mat;
+    }
+    public static String[] getStringMaterias(){
         return materias;
     }
     public static GridLayout gridLayout(){
