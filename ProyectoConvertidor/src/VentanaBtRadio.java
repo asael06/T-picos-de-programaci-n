@@ -6,6 +6,7 @@ import java.awt.event.ItemListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -17,10 +18,11 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author RAHR_
+ * @author asael
  */
 public class VentanaBtRadio extends JFrame implements ItemListener{
 //Atributos de clase
+    JPanel pnlOpciones;
     GridLayout grid;
     JRadioButton divisa,volumen,longitud,pesoMasa,temp;
     JRadioButton energia;
@@ -35,6 +37,8 @@ public class VentanaBtRadio extends JFrame implements ItemListener{
         campoEntrada = new JTextField();
         labelSalida = new JLabel("Salida...");
         campoSalida = new JTextField();
+        pnlOpciones=new JPanel();
+        pnlOpciones.setLayout(new GridLayout());
         divisa = new JRadioButton("Divisa");
         volumen = new JRadioButton("Volumen");
         longitud = new JRadioButton("Longitud");
@@ -45,7 +49,14 @@ public class VentanaBtRadio extends JFrame implements ItemListener{
         
         peso=dolar=0;
         
-        add(labelConvertidor);
+        pnlOpciones.add(labelConvertidor);
+        pnlOpciones.add(divisa);
+        pnlOpciones.add(volumen);
+        pnlOpciones.add(longitud);
+        pnlOpciones.add(pesoMasa);
+        pnlOpciones.add(temp);
+        pnlOpciones.add(energia);
+        add(pnlOpciones);
         add(campoEntrada);
         add(labelSalida);
         add(campoSalida);
@@ -66,7 +77,7 @@ public class VentanaBtRadio extends JFrame implements ItemListener{
     
      public void PropiedadesVentana (){
         grid = new GridLayout(10,1);
-        setSize(500,700);
+        setSize(600,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(grid);
@@ -77,8 +88,13 @@ public class VentanaBtRadio extends JFrame implements ItemListener{
     
     @Override
     public void itemStateChanged(ItemEvent ie) {
+        float input=0,exit=0;
+        
         if(ie.getItemSelectable() == divisa){
-         //convertir la entrada(campo entrada) a dolares y asignarla a (campo salida)   
+         //convertir la entrada(campo entrada) a dolares y asignarla a (campo salida)            
+            input=Float.parseFloat(campoEntrada.getText());
+            exit=input/18.56f;
+            campoSalida.setText(exit+"");
          
         }//divisa
         
