@@ -8,20 +8,22 @@ package Principal;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
  *
  * @author RAHR_
  */
-public class MiPanelEncabezado {
+public class MiPanelEncabezado extends JFrame {
     JLabel logoTecNm;
     JLabel titulo;
     JLabel logoTec;
     JLabel derechosReservados;
-
-    public MiPanelEncabezado() {
+    
+    
+    
+    public MiPanelEncabezado() {       
         this.setLayout(new GridLayout(1,4,5,5));
         this.logoTecNm = new JLabel();
         this.logoTecNm.setText("");
@@ -36,7 +38,7 @@ public class MiPanelEncabezado {
         this.titulo.setText("Aqui sabe que va");
         this.titulo.setFont(new Font ("Tahoma",Font.BOLD,16));
         this.add(titulo);
-        this.setBackGround(Color.BLUE);
+        setBackground(Color.red);
         
     }
 
